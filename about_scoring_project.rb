@@ -50,10 +50,6 @@ def score(dice)
     if n % 2 == 0
       return 0
     end
-
-    if n == number
-      score = n * 100
-    end
   end 
   return score
 end
