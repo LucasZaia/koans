@@ -41,25 +41,19 @@ def score(dice)
 
   countfive = 0
 
-  aux = 0
-
   if dice.empty?
     return 0
   end
 
   array = dice.select{|n| dice.count(n) == 3}
 
-  puts array
-
   dice.each do |n|
 
     if n == 5
-      result+= 50
       countfive += 1
     end
 
     if n == 1
-      result+=100
       count += 1
     end 
 
@@ -73,12 +67,33 @@ def score(dice)
     end 
   end 
 
-  score+=result+unit
-
   if count == 3
     score+=1000
-    return 1000
+    count=0
   end
+
+  if count < 3 && count > 0
+    score+=100*count
+  end
+
+  if count > 3
+    score+= 1000+((count-3)*100)
+  end
+
+  if countfive == 3
+    score+=5*100
+    countfive=0
+  end
+
+  if countfive > 3
+    score+= 500+((countfive-3)*50)
+  end
+
+  if countfive < 3 && countfive > 0
+    score+=50*countfive
+  end
+  
+   score+=unit
 
   return score
 end
